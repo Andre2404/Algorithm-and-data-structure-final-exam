@@ -5,5 +5,5 @@ This repository contains the final project for the Algorithm and Data Structures
 • Andre Saputra 
 • Randi Sunarto
 • Pabian Ayala
-• Rifa'a Amelia
+• Rifa'a Aemelia
 • Muzzaki Al'Arif
