@@ -27,7 +27,7 @@ public class DPOKillerList {
         }
         scanner.close();
 
-     // Maps to store the count of killings and victims
+     // Map untuk insiden dan korban
         Map<String, Integer> killerCount = new HashMap<>();
         Set<String> victims = new HashSet<>();
 
@@ -39,4 +39,14 @@ public class DPOKillerList {
             killerCount.put(killer, killerCount.getOrDefault(killer, 0) + 1);
             victims.add(victim);
         }
+        
+    // menghilangkan pembunuh yang juga menjadi korban pembunuhan 
+        Iterator<String> iterator = killerCount.keySet().iterator();
+        while (iterator.hasNext()) {
+            String killer = iterator.next();
+            if (victims.contains(killer)) {
+                iterator.remove();
+            }
+        }
+
 
