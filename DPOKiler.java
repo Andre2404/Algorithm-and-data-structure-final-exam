@@ -31,3 +31,12 @@ public class DPOKillerList {
         Map<String, Integer> killerCount = new HashMap<>();
         Set<String> victims = new HashSet<>();
 
+    // memproses tiap insiden
+        for (String[] incident : incidents) {
+            String killer = incident[0];
+            String victim = incident[1];
+
+            killerCount.put(killer, killerCount.getOrDefault(killer, 0) + 1);
+            victims.add(victim);
+        }
+
