@@ -12,3 +12,16 @@ public class DPOKillerList {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         List<String[]> incidents = new ArrayList<>();
+        
+// Input data
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (line.isEmpty()) break;
+            String[] names = line.split(" ");
+            // Menggunakan huruf Kapital di setiap huruf Pertama setiap nama
+            for (int i = 0; i < names.length; i++) {
+                names[i] = capitalizeFirstLetter(names[i]);
+            }
+            incidents.add(names);
+        }
+        scanner.close();
