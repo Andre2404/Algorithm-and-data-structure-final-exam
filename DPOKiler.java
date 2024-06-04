@@ -53,3 +53,11 @@ public class DPOKillerList {
     // mengurutkan pembunuh berdasarkan nama
         List<String> killers = new ArrayList<>(killerCount.keySet());
         Collections.sort(killers);
+        
+    // Output
+        System.out.println("DAFTAR PENCARIAN ORANG KASUS PEMBUNUHAN");
+        for (String killer : killers) {
+            System.out.println(killer + " " + killerCount.get(killer));
+        }
+    }
+}
