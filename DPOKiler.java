@@ -2,7 +2,8 @@ import java.util.*;
 
 public class DPOKillerList {
 
-    //Metode utility untuk menggunakan huruf kapital pada setiap nama                   private static String capitalizeFirstLetter(String input) {
+    //Metode utility untuk menggunakan huruf kapital pada setiap nama                   
+    private static String capitalizeFirstLetter(String input) {
         if (input == null || input.isEmpty()) {
             return input;
         }
@@ -13,7 +14,7 @@ public class DPOKillerList {
         Scanner scanner = new Scanner(System.in);
         List<String[]> incidents = new ArrayList<>();
         
-// Input data
+    // Input data
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             if (line.isEmpty()) break;
@@ -25,3 +26,8 @@ public class DPOKillerList {
             incidents.add(names);
         }
         scanner.close();
+
+     // Maps to store the count of killings and victims
+        Map<String, Integer> killerCount = new HashMap<>();
+        Set<String> victims = new HashSet<>();
+
