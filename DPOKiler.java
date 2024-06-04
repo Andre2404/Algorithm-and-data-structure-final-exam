@@ -3,7 +3,7 @@ import java.util.*;
 public class DPOKillerList {
 
     //Metode utility untuk menggunakan huruf kapital pada setiap nama                   
-    private static String capitalizeFirstLetter(String input) {
+    private static String capital(String input) {
         if (input == null || input.isEmpty()) {
             return input;
         }
@@ -21,7 +21,7 @@ public class DPOKillerList {
             String[] names = line.split(" ");
             // Menggunakan huruf Kapital di setiap huruf Pertama setiap nama
             for (int i = 0; i < names.length; i++) {
-                names[i] = capitalizeFirstLetter(names[i]);
+                names[i] = capital(names[i]);
             }
             incidents.add(names);
         }
@@ -50,3 +50,6 @@ public class DPOKillerList {
         }
 
 
+    // mengurutkan pembunuh berdasarkan nama
+        List<String> killers = new ArrayList<>(killerCount.keySet());
+        Collections.sort(killers);
