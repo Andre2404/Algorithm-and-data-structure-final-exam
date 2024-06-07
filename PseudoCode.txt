@@ -1,62 +1,60 @@
 FUNCTION capital(input: STRING): STRING
-    IF input IS NULL OR input IS EMPTY THEN
-        RETURN input
+    IF input IS NULL OR input IS EMPTY THEN              // O(1)
+        RETURN input                                     // O(1)
     END IF
-    RETURN FIRST_CHARACTER(input) IN UPPERCASE + REMAINING_CHARACTERS(input) IN LOWERCASE
+    RETURN FIRST_CHARACTER(input) IN UPPERCASE + REMAINING_CHARACTERS(input) IN LOWERCASE // O(1)
 END FUNCTION
 
 MAIN
-    INITIALIZE scanner TO READ INPUT
-    INITIALIZE incidents AS EMPTY LIST OF STRING ARRAYS
-
-// Input data
-    WHILE scanner HAS NEXT LINE
-        READ line FROM scanner AND TRIM WHITESPACE
-        IF line IS EMPTY THEN
-            BREAK
+    INITIALIZE scanner TO READ INPUT                     // O(1)
+    INITIALIZE incidents AS EMPTY LIST OF STRING ARRAYS  // O(1)
+    
+    // Input data
+    WHILE scanner HAS NEXT LINE                          // O(n)
+        READ line FROM scanner AND TRIM WHITESPACE       // O(m)
+        IF line IS EMPTY THEN                            // O(1)
+            BREAK                                        // O(1)
         END IF
-        SPLIT line INTO names ARRAY BY SPACE
-        IF names LENGTH IS EQUAL TO 2 THEN
-            names[0] = capital(names[0])
-            names[1] = capital(names[1])
-            ADD names TO incidents
+        SPLIT line INTO names ARRAY BY SPACE             // O(m)
+        IF names LENGTH IS EQUAL TO 2 THEN               // O(1)
+            names[0] = capital(names[0])                 // O(1)
+            names[1] = capital(names[1])                 // O(1)
+            ADD names TO incidents                       // O(1)
         END IF
     END WHILE
-    CLOSE scanner
+    CLOSE scanner                                        // O(1)
 
-    INITIALIZE killerCount AS EMPTY MAP OF STRING TO INTEGER
-    INITIALIZE victims AS EMPTY SET OF STRING
-
-// Memproses setiap insiden
-    FOR EACH incident IN incidents
-        SET killer TO incident[0]
-        SET victim TO incident[1]
+    INITIALIZE killerCount AS EMPTY MAP OF STRING TO INTEGER  // O(1)
+    INITIALIZE victims AS EMPTY SET OF STRING            // O(1)
+    
+    // Process each incident
+    FOR EACH incident IN incidents                       // O(n)
+        SET killer TO incident[0]                        // O(1)
+        SET victim TO incident[1]                        // O(1)
         
-        IF killer EXISTS IN killerCount THEN
-            INCREMENT killerCount[killer] BY 1
+        IF killer EXISTS IN killerCount THEN             // O(1)
+            INCREMENT killerCount[killer] BY 1           // O(1)
         ELSE
-            SET killerCount[killer] TO 1
+            SET killerCount[killer] TO 1                 // O(1)
         END IF
         
-        ADD victim TO victims
+        ADD victim TO victims                            // O(1)
     END FOR
-
-// menghilangkan pembunuh yang juga menjadi korban 
-    FOR EACH killer IN killerCount KEYS
-        IF killer IS IN victims THEN
-            REMOVE killer FROM killerCount
+    
+    // Remove killers who are also victims
+    FOR EACH killer IN killerCount KEYS                  // O(k)
+        IF killer IS IN victims THEN                     // O(1)
+            REMOVE killer FROM killerCount               // O(1)
         END IF
     END FOR
-  
-// mengurutkan pembunuh beradasarkan abjad
-    INITIALIZE killers AS LIST OF killerCount KEYS
-    SORT killers
-
-
-// Output
-    PRINT "DAFTAR PENCARIAN ORANG KASUS PEMBUNUHAN"
-    FOR EACH killer IN killers
-        PRINT killer + " " + killerCount[killer]
-    END FOR
-END MAIN
-
+    
+    // Sort killers by name
+    INITIALIZE killers AS LIST OF killerCount KEYS       // O(k)
+    SORT killers                                         // O(k log k)
+    
+    // Output
+    PRINT "DAFTAR PENCARIAN ORANG KASUS PEMBUNUHAN"      // O(1)
+    FOR EACH killer IN killers                           // O(k)
+        PRINT killer + " " + killerCount[killer]         // O(1)
+    END FOR
+END MAIN
