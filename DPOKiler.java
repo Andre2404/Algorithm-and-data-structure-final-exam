@@ -2,7 +2,7 @@ import java.util.*;
 
 public class DPOKillerList {
 
-    //Metode utility untuk menggunakan huruf kapital pada setiap nama                   
+    // Metode utility untuk menggunakan huruf kapital pada setiap nama
     private static String capital(String input) {
         if (input == null || input.isEmpty()) {
             return input;
@@ -13,25 +13,26 @@ public class DPOKillerList {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         List<String[]> incidents = new ArrayList<>();
-        
-    // Input data
+
+        // Input data
         while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+            String line = scanner.nextLine().trim();
             if (line.isEmpty()) break;
             String[] names = line.split(" ");
-            // Menggunakan huruf Kapital di setiap huruf Pertama setiap nama
-            for (int i = 0; i < names.length; i++) {
-                names[i] = capital(names[i]);
+            if (names.length == 2) {
+                // Menggunakan huruf kapital di setiap huruf pertama setiap nama
+                names[0] = capital(names[0]);
+                names[1] = capital(names[1]);
+                incidents.add(names);
             }
-            incidents.add(names);
         }
         scanner.close();
 
-     // Map untuk insiden dan korban
+        // Map untuk insiden dan korban
         Map<String, Integer> killerCount = new HashMap<>();
         Set<String> victims = new HashSet<>();
 
-    // memproses tiap insiden
+        // Memproses tiap insiden
         for (String[] incident : incidents) {
             String killer = incident[0];
             String victim = incident[1];
@@ -39,25 +40,18 @@ public class DPOKillerList {
             killerCount.put(killer, killerCount.getOrDefault(killer, 0) + 1);
             victims.add(victim);
         }
-        
-    // menghilangkan pembunuh yang juga menjadi korban pembunuhan 
-        Iterator<String> iterator = killerCount.keySet().iterator();
-        while (iterator.hasNext()) {
-            String killer = iterator.next();
-            if (victims.contains(killer)) {
-                iterator.remove();
-            }
-        }
 
+        // Menghilangkan pembunuh yang juga menjadi korban pembunuhan
+        killerCount.keySet().removeIf(victims::contains);
 
-    // mengurutkan pembunuh berdasarkan nama
+        // Mengurutkan pembunuh berdasarkan nama
         List<String> killers = new ArrayList<>(killerCount.keySet());
         Collections.sort(killers);
-        
-    // Output
+
+        // Output
         System.out.println("DAFTAR PENCARIAN ORANG KASUS PEMBUNUHAN");
         for (String killer : killers) {
             System.out.println(killer + " " + killerCount.get(killer));
-        }
-    }
+        }
+    }
 }
