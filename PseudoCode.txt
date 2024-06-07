@@ -48,3 +48,10 @@ MAIN
         END IF
     END FOR
 
+// Output
+    PRINT "DAFTAR PENCARIAN ORANG KASUS PEMBUNUHAN"
+    FOR EACH killer IN killers
+        PRINT killer + " " + killerCount[killer]
+    END FOR
+END MAIN
+
