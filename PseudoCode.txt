@@ -9,3 +9,17 @@ MAIN
     INITIALIZE scanner TO READ INPUT
     INITIALIZE incidents AS EMPTY LIST OF STRING ARRAYS
 
+// Input data
+    WHILE scanner HAS NEXT LINE
+        READ line FROM scanner AND TRIM WHITESPACE
+        IF line IS EMPTY THEN
+            BREAK
+        END IF
+        SPLIT line INTO names ARRAY BY SPACE
+        IF names LENGTH IS EQUAL TO 2 THEN
+            names[0] = capital(names[0])
+            names[1] = capital(names[1])
+            ADD names TO incidents
+        END IF
+    END WHILE
+    CLOSE scanner
