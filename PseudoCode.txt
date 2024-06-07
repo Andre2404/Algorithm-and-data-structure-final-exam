@@ -40,3 +40,11 @@ MAIN
         
         ADD victim TO victims
     END FOR
+
+// menghilangkan pembunuh yang juga menjadi korban 
+    FOR EACH killer IN killerCount KEYS
+        IF killer IS IN victims THEN
+            REMOVE killer FROM killerCount
+        END IF
+    END FOR
+
