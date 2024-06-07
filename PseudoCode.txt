@@ -47,6 +47,11 @@ MAIN
             REMOVE killer FROM killerCount
         END IF
     END FOR
+  
+// mengurutkan pembunuh beradasarkan abjad
+    INITIALIZE killers AS LIST OF killerCount KEYS
+    SORT killers
+
 
 // Output
     PRINT "DAFTAR PENCARIAN ORANG KASUS PEMBUNUHAN"
