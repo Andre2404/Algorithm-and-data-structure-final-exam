@@ -27,3 +27,16 @@ MAIN
     INITIALIZE killerCount AS EMPTY MAP OF STRING TO INTEGER
     INITIALIZE victims AS EMPTY SET OF STRING
 
+// Memproses setiap insiden
+    FOR EACH incident IN incidents
+        SET killer TO incident[0]
+        SET victim TO incident[1]
+        
+        IF killer EXISTS IN killerCount THEN
+            INCREMENT killerCount[killer] BY 1
+        ELSE
+            SET killerCount[killer] TO 1
+        END IF
+        
+        ADD victim TO victims
+    END FOR
