@@ -13,20 +13,34 @@ public class DPOKillerList {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         List<String[]> incidents = new ArrayList<>();
-
+        
         // Input data
-        while (scanner.hasNextLine()) {
+        int lineCount = 0;
+        while (scanner.hasNextLine() && lineCount < 1000) {
             String line = scanner.nextLine().trim();
             if (line.isEmpty()) break;
             String[] names = line.split(" ");
+            
             if (names.length == 2) {
-                // Menggunakan huruf kapital di setiap huruf pertama setiap nama
-                names[0] = capital(names[0]);
-                names[1] = capital(names[1]);
-                incidents.add(names);
+                if (names[0].length() <= 10 && names[1].length() <= 10) {
+                    // Menggunakan huruf kapital di setiap huruf pertama setiap nama
+                    names[0] = capital(names[0]);
+                    names[1] = capital(names[1]);
+                    incidents.add(names);
+                    lineCount++;
+                } else {
+                    System.out.println("Nama harus tidak lebih dari 10 karakter. Silakan coba lagi.");
+                }
+            } else {
+                System.out.println("Masukkan format 'nama pembunuh nama korban'.");
             }
         }
         scanner.close();
+
+        if (lineCount == 0) {
+            System.out.println("Minimal harus ada satu baris input.");
+            return;
+        }
 
         // Map untuk insiden dan korban
         Map<String, Integer> killerCount = new HashMap<>();
@@ -54,4 +68,4 @@ public class DPOKillerList {
             System.out.println(killer + " " + killerCount.get(killer));
         }
     }
-}
+                }
